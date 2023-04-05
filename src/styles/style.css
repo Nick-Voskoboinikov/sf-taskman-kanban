@@ -54,7 +54,7 @@
   overflow-y: hidden;
   overflow-x: hidden;
 }
-.app-div__backlog, .app-div__ready, .app-div_in-progress, .app-div_finished {
+.app-div__backlog, .app-div__ready, .app-div__in-progress, .app-div__finished {
   display: block;
   width: 22vw;
   min-height: 25vh;
@@ -78,14 +78,14 @@
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
 }
-.app-div_in-progress::before{
+.app-div__in-progress::before{
   content: 'In progress';
   display: block;
   height: 17px;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
 }
-.app-div_finished::before{
+.app-div__finished::before{
   content: 'Finished';
   display: block;
   height: 17px;
@@ -333,7 +333,7 @@
   .app-kanban__board{
     flex-direction: column;
   }
-  .app-div__backlog, .app-div__ready, .app-div_in-progress, .app-div_finished {
+  .app-div__backlog, .app-div__ready, .app-div__in-progress, .app-div__finished {
     width: 96vw;
     max-height: inherit;
   }
