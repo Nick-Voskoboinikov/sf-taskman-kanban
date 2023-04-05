@@ -64,15 +64,14 @@ loginForm.addEventListener("submit", function (e) {
         inProgressItemCandidateNewOpt.textContent=textString;
         inProgressItemCandidates.appendChild(inProgressItemCandidateNewOpt);
         document.querySelector('.app-div__finished>.app-button__add').disabled = false;
-        this.removeFromInProgress(textString);
+        this.removeFromReady(textString);
         redrawSelect('.app-wrapper__in-progresslist');
         redrawSelect('.app-wrapper__finishedlist');
         // todo: real recalculate Ready content & if zero - then disble its own (ready) button
         //(document.querySelector('.app-num__ready-tasks')).innerHTML=this.backlogTasks.length;
       };
       this.writeFinished = function (textString) {
-        localStorage.setItem(this.userid + '-tasks-finished', JSON.stringify(textString));
-        this.finishedTasks = JSON.parse(localStorage.getItem(this.userid + '-tasks-in-progress') || "[]");
+        this.finishedTasks = JSON.parse(localStorage.getItem(this.userid + '-tasks-finished') || "[]");
         if(typeof this.finishedTasks === 'string') this.finishedTasks=[this.finishedTasks];
         (this.finishedTasks).push(textString);
         localStorage.setItem(this.userid + '-tasks-finished', JSON.stringify(this.finishedTasks));
@@ -80,11 +79,11 @@ loginForm.addEventListener("submit", function (e) {
         let finishedItemCandidateNewOpt=document.createElement('option');
         finishedItemCandidateNewOpt.textContent=textString;
         finishedItemCandidates.appendChild(finishedItemCandidateNewOpt);
-        this.removeFromFinished(textString);
-        redrawSelect('.app-wrapper__in-progresslist');
+        this.removeFromInProgress(textString);
+        //redrawSelect('.app-wrapper__in-progresslist');
         redrawSelect('.app-wrapper__finishedlist');
         // todo: real recalculate Ready content & if zero - then disble its own (ready) button
-        (document.querySelector('.app-num__finished-tasks')).innerHTML=this.finishedTasks.length;
+        (document.querySelector('.app-num__finished-tasks')).innerHTML=(this.finishedTasks).length;
       };
       this.removeFromBacklog = function (textString) {
         this.backlogTasks=(this.backlogTasks).filter(item => item !== textString);
@@ -198,7 +197,6 @@ loginForm.addEventListener("submit", function (e) {
 
 
 function redrawSelect(select){
-  console.log(select);
   /* based on https://www.w3schools.com/howto/howto_custom_select.asp */
   let x, i, j, selElmnt, a, b, c, elemsToDel;
   /*look for any elements with the class "app-select__list":*/
