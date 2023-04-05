@@ -1,0 +1,48 @@
+<div class="app-title"><div><h1 class="app-title__text">Awesome Kanban board</h1></div>
+<div class="app-div__usericon">
+    <div class="app-user-avatar"></div>
+    <div class="app-user-arrow"></div><span class="app-menu__tooltip"><button>щёлк!</button></span>
+  </div>
+</div>
+<div class="app-kanban__board">
+    <div class="app-div__backlog">
+        <div class="app-wrapper__backloglist">
+            <ul class="app-list__backlog"><li><input type="text" placeholder="New task title..." class="app-input__task-input" /></li></ul>
+        </div>
+        <button type="button" class="app-button__add">+&nbsp;Add&nbsp;card</button><button type="button" class="app-button__sbmt">Submit</button>
+    </div>
+    <div class="app-div__ready">
+        <div class="app-wrapper__readylist">
+            <ul class="app-list__ready"><li></li></ul>
+            <div class="app-select__list">
+                <select class="app-preselect__pseudo" ></select>
+            </div>
+        </div>
+        <button type="button" class="app-button__add" disabled>+&nbsp;Add&nbsp;card</button><button type="button" class="app-button__sbmt">Submit</button>
+    </div>
+    <div class="app-div_in-progress">
+        <div class="app-wrapper__in-progresslist">
+            <ul class="app-list__in-progress"><li></li></ul>
+            <div class="app-select__list">
+                <select class="app-preselect__pseudo" ></select>
+            </div>
+        </div>
+        <button type="button" class="app-button__add" disabled>+&nbsp;Add&nbsp;card</button><button type="button" class="app-button__sbmt">Submit</button>
+    </div>
+    <div class="app-div_finished">
+        <div class="app-wrapper__finishedlist">
+            <ul class="app-list__finished"><li></li></ul>
+            <div class="app-select__list">
+                <select class="app-preselect__pseudo" ></select>
+            </div>
+        </div>
+        <button type="button" class="app-button__add" disabled>+&nbsp;Add&nbsp;card</button><button type="button" class="app-button__sbmt">Submit</button>
+    </div>
+</div>
+
+<div class="app-footer">
+    <h1 class="app-footer__text">
+        <span>Active&nbsp;tasks: <span class="app-num__ready-tasks">&lt;N&gt;</span>
+        Finished&nbsp;tasks: <span class="app-num__finished-tasks">&lt;N&gt;</span></span>
+        <span>Kanban&nbsp;board&nbsp;by: Nick&nbsp;Voskoboinikov, 2023</span></h1>
+</div>

@@ -1,0 +1,340 @@
+#app-login-btn {
+  width: 160px;
+}
+.bg-light {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.app-title, .app-footer{
+  position: absolute;
+  min-width: 100vw;
+  background-color: #0067A3;
+  color: white;
+  z-index: 2;
+}
+.app-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 55px;
+  top: 0;
+  left: 0;
+
+}
+.app-title__text {
+  margin: 11px 20px;
+  font-size: 28px;
+}
+.app-footer{
+  min-height: 55px;
+  bottom: 0;
+  left: 0;
+  padding-top: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.app-footer__text {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.app-kanban__board{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  position: absolute;
+  min-width: 100vw;
+  min-height: 99vh;
+  top: 55px;
+  left: 0;
+  z-index: 1;
+  background-color: #0079BF;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.app-div__backlog, .app-div__ready, .app-div_in-progress, .app-div_finished {
+  display: block;
+  width: 22vw;
+  min-height: 25vh;
+  background-color: #EBECF0;
+  border-radius: 10px;
+  margin: 12px;
+  padding: 10px 0 10px 10px;
+  max-height: 82vh;
+}
+.app-div__backlog::before{
+  content: 'Backlog';
+  display: block;
+  height: 17px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+}
+.app-div__ready::before{
+  content: 'Ready';
+  display: block;
+  height: 17px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+}
+.app-div_in-progress::before{
+  content: 'In progress';
+  display: block;
+  height: 17px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+}
+.app-div_finished::before{
+  content: 'Finished';
+  display: block;
+  height: 17px;
+}
+.app-wrapper__backloglist, .app-wrapper__readylist, .app-wrapper__in-progresslist, .app-wrapper__finishedlist{
+  margin-top: 12px;
+  min-height: 23vh;
+  max-height: 69vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.app-wrapper__backloglist::-webkit-scrollbar,.app-wrapper__readylist::-webkit-scrollbar,.app-wrapper__in-progresslist::-webkit-scrollbar,.app-wrapper__finishedlist::-webkit-scrollbar {
+  width: 10px;
+}
+.app-wrapper__backloglist::-webkit-scrollbar-track,.app-wrapper__readylist::-webkit-scrollbar-track,.app-wrapper__in-progresslist::-webkit-scrollbar-track,.app-wrapper__finishedlist::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 5px;
+}
+.app-wrapper__backloglist::-webkit-scrollbar-thumb,.app-wrapper__readylist::-webkit-scrollbar-thumb,.app-wrapper__in-progresslist::-webkit-scrollbar-thumb,.app-wrapper__finishedlist::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #CBCBCB;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+.app-wrapper__backloglist::-webkit-scrollbar-thumb:window-inactive,.app-wrapper__readylist::-webkit-scrollbar-thumb:window-inactive,.app-wrapper__in-progresslist::-webkit-scrollbar-thumb:window-inactive,.app-wrapper__finishedlist::-webkit-scrollbar-thumb:window-inactive {
+  background: #CBCBCB;
+}
+.app-wrapper__backloglist::-webkit-scrollbar-thumb:hover,.app-wrapper__readylist::-webkit-scrollbar-thumb:hover,.app-wrapper__in-progresslist::-webkit-scrollbar-thumb:hover,.app-wrapper__finishedlist::-webkit-scrollbar-thumb:hover {
+  background: #CBCBCB;
+}
+.app-list__backlog,.app-list__ready, .app-list__in-progress, .app-list__finished{
+  display: contents;
+  list-style: none;
+  list-style-position: inside;
+}
+.app-list__backlog>li,.app-list__ready>li, .app-list__in-progress>li, .app-list__finished>li {
+  display: block;
+  padding: 0 2px;
+  margin: 2px 0;
+  width: 98%;
+  background-color: white;
+  border: 0 solid transparent;
+  border-radius: 5px;
+  font-size: 1em;
+  margin: 12px 0;
+  word-wrap: break-word;
+}
+.app-list__backlog>li:last-of-type {
+  background-color: transparent;
+}
+.app-button__add{
+  display: block;
+  position: relative;
+  bottom: 0;
+  left: 10px;
+  border: 0 solid transparent;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #5E6C84;
+}
+.app-button__add:not([disabled]):hover, .app-button__add:not([disabled]):focus{
+  cursor: pointer;
+  background-color: white;
+  color: #5E6C84;
+}
+.app-button__add[disabled]{
+  background-color: #dddddd;
+  color: white;
+}
+.app-button__add[disabled]:hover, .app-button__add[disabled]:focus{
+  cursor: not-allowed;
+}
+.app-button__sbmt {
+  display: none;
+  border: 0 solid transparent;
+  border-radius: 5px;
+  color: white;
+  background-color: #0079BF;
+}
+/* Tooltip container */
+.app-div__usericon {
+  position: relative;
+  display: inline-block;
+  width: 85px;
+  height: 56px;
+  z-index: 3;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+
+/* Tooltip text */
+.app-div__usericon .app-menu__tooltip {
+  visibility: hidden;
+  width: 120px;
+  top: 100%;
+  left: 50%;
+  margin-left: -80px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 4;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.9s;
+}
+
+/* Tooltip arrow */
+.app-div__usericon .app-menu__tooltip::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 70%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.app-div__usericon[active] .app-menu__tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.app-user-avatar {
+  display: block;
+  float: left;
+  height: 40px;
+  width: 40px;
+  position: relative;
+  margin-top: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_2_4)'%3E%3Cpath d='M20 39.2C30.6039 39.2 39.2 30.6039 39.2 20C39.2 9.39612 30.6039 0.799988 20 0.799988C9.39612 0.799988 0.799988 9.39612 0.799988 20C0.799988 30.6039 9.39612 39.2 20 39.2Z' stroke='white' stroke-width='2' stroke-miterlimit='10' stroke-linecap='round'/%3E%3Cpath d='M23.9464 28.4224C23.8296 27.1328 23.8744 26.2328 23.8744 25.0544C24.4584 24.748 25.5048 22.7944 25.6816 21.144C26.1408 21.1064 26.8648 20.6584 27.0768 18.8896C27.1912 17.94 26.7368 17.4056 26.46 17.2376C27.2072 14.9904 28.7592 8.03841 23.5896 7.32001C23.0576 6.38561 21.6952 5.91281 19.9248 5.91281C12.8416 6.04321 11.9872 11.2616 13.54 17.2376C13.264 17.4056 12.8096 17.94 12.9232 18.8896C13.136 20.6584 13.8592 21.1064 14.3184 21.144C14.4944 22.7936 15.5824 24.748 16.168 25.0544C16.168 26.2328 16.212 27.1328 16.0952 28.4224C15.0864 31.1344 9.90561 31.3464 6.91681 33.9616C10.0416 37.108 15.1056 39.3584 20.4496 39.3584C25.7936 39.3584 32.0752 35.1392 33.1208 33.988C30.1504 31.3488 24.9576 31.144 23.9464 28.4224Z' fill='black'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_2_4'%3E%3Crect width='40' height='40' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+}
+.app-user-arrow{
+  display: block;
+  float: left;
+  width: 12px;
+  height: 8px;
+  position: relative;
+  margin: 24px 24px 24px 6px;
+  top: 0;
+  left: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.415 0.209991L6 4.79499L10.585 0.209991L12 1.62499L6 7.62499L0 1.62499L1.415 0.209991Z' fill='white'/%3E%3C/svg%3E");
+}
+
+.app-input__task-input{
+  display: none;
+  width: 100%;
+  height: 35px;
+  border: 0 solid transparent;
+  border-radius: 5px;
+  font-size: 1em;
+  margin: 12px 0;
+}
+.app-input__task-input:focus{
+  outline: none;
+}
+.app-input__task-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+.app-input__task-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: black;
+}
+.app-input__task-input::-ms-input-placeholder { /* Microsoft Edge */
+  color: black;
+}
+
+
+
+/*the container must be positioned relative:*/
+.app-select__list {
+  position: relative;
+  font-family: Roboto;
+}
+.app-select__list .app-preselect__pseudo {
+  display: none; /*hide original SELECT element:*/
+}
+.select-selected {
+  background-color: white;
+  border-radius: 5px;
+}
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: url("data:image/svg+xml,%3Csvg width='20' height='14' viewBox='0 0 20 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 0.5L11 13L19 0.5' stroke='black'/%3E%3C/svg%3E");
+  right: 28px;
+  width: 0;
+  height: 0;
+}
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent white transparent;
+  top: 7px;
+}
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: black;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent #DEDEDE transparent;
+  cursor: pointer;
+  user-select: none;
+}
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+.select-items div:hover, .same-as-selected {
+  background-color: #DEDEDE;
+}
+
+.app-select__list > .select-selected {
+  display: none;
+}
+
+@media only screen and (max-width:654px){
+  .bg-light {
+    overflow-y: auto;
+  }
+  .app-kanban__board {
+    overflow-y: auto;
+  }
+  .app-title__text{
+    display: none;
+  }
+  .app-footer{
+    display: none;
+  }
+  .app-kanban__board{
+    flex-direction: column;
+  }
+  .app-div__backlog, .app-div__ready, .app-div_in-progress, .app-div_finished {
+    width: 96vw;
+    max-height: inherit;
+  }
+}
