@@ -59,7 +59,7 @@ loginForm.addEventListener("submit", function (e) {
         if(typeof this.inProgressTasks === 'string') this.inProgressTasks=[this.inProgressTasks];
         (this.inProgressTasks).push(textString);
         localStorage.setItem(this.userid + '-tasks-in-progress', JSON.stringify(this.inProgressTasks));
-        let inProgressItemCandidates=document.querySelector('.app-wrapper__in-progresslist > .app-select__list > .app-preselect__pseudo');
+        let inProgressItemCandidates=document.querySelector('.app-wrapper__finishedlist > .app-select__list > .app-preselect__pseudo');
         let inProgressItemCandidateNewOpt=document.createElement('option');
         inProgressItemCandidateNewOpt.textContent=textString;
         inProgressItemCandidates.appendChild(inProgressItemCandidateNewOpt);
@@ -72,6 +72,19 @@ loginForm.addEventListener("submit", function (e) {
       };
       this.writeFinished = function (textString) {
         localStorage.setItem(this.userid + '-tasks-finished', JSON.stringify(textString));
+        this.finishedTasks = JSON.parse(localStorage.getItem(this.userid + '-tasks-in-progress') || "[]");
+        if(typeof this.finishedTasks === 'string') this.finishedTasks=[this.finishedTasks];
+        (this.finishedTasks).push(textString);
+        localStorage.setItem(this.userid + '-tasks-finished', JSON.stringify(this.finishedTasks));
+        let finishedItemCandidates=document.querySelector('.app-wrapper__finishedlist > .app-select__list > .app-preselect__pseudo');
+        let finishedItemCandidateNewOpt=document.createElement('option');
+        finishedItemCandidateNewOpt.textContent=textString;
+        finishedItemCandidates.appendChild(finishedItemCandidateNewOpt);
+        this.removeFromFinished(textString);
+        redrawSelect('.app-wrapper__in-progresslist');
+        redrawSelect('.app-wrapper__finishedlist');
+        // todo: real recalculate Ready content & if zero - then disble its own (ready) button
+        (document.querySelector('.app-num__finished-tasks')).innerHTML=this.finishedTasks.length;
       };
       this.removeFromBacklog = function (textString) {
         this.backlogTasks=(this.backlogTasks).filter(item => item !== textString);
@@ -84,6 +97,10 @@ loginForm.addEventListener("submit", function (e) {
       this.removeFromInProgress = function (textString) {
         this.inProgressTasks=(this.inProgressTasks).filter(item => item !== textString);
         localStorage.setItem(this.userid + '-tasks-in-progress', JSON.stringify(this.inProgressTasks));
+      };
+      this.removeFromFinished = function (textString) {
+        this.finishedTasks=(this.finishedTasks).filter(item => item !== textString);
+        localStorage.setItem(this.userid + '-tasks-in-progress', JSON.stringify(this.finishedTasks));
       };
       this.recall = function () {
         this.backlogTasks = JSON.parse(localStorage.getItem(this.userid + '-tasks-backlog') || "[]");
@@ -166,12 +183,12 @@ loginForm.addEventListener("submit", function (e) {
       inProgressSbmt.addEventListener('click',function(){
         addNewInProgressTask(inProgressSbmt,inProgressAddBtn,inProgressList,myTasks);
       });
-//      finishedAddBtn.addEventListener('click',function(){
-//        startNewFinishedTask(finishedAddBtn,finishedSbmt);
-//      });
-//      finishedSbmt.addEventListener('click',function(){
-//        addNewFinishedTask(finishedSbmt,finishedAddBtn,finishedList,myTasks);
-//      });
+     finishedAddBtn.addEventListener('click',function(){
+       startNewFinishedTask(finishedAddBtn,finishedSbmt);
+     });
+     finishedSbmt.addEventListener('click',function(){
+       addNewFinishedTask(finishedSbmt,finishedAddBtn,finishedList,myTasks);
+     });
       /*if the user clicks anywhere outside the select box,
       then close all select boxes:*/
       document.addEventListener('click', closeAllSelect);
@@ -181,6 +198,7 @@ loginForm.addEventListener("submit", function (e) {
 
 
 function redrawSelect(select){
+  console.log(select);
   /* based on https://www.w3schools.com/howto/howto_custom_select.asp */
   let x, i, j, selElmnt, a, b, c, elemsToDel;
   /*look for any elements with the class "app-select__list":*/
@@ -265,6 +283,8 @@ if (elemsToDel.length > 0) {
   function delLiWithContent(searchRoot, textcontent){
     let elem = document.evaluate('//li[contains(., "'+textcontent+'")]', searchRoot, null, XPathResult.ANY_TYPE, null );
     let thisElem = elem.iterateNext();
+    let parentBtn=(thisElem.parentNode.parentNode.parentNode).querySelector('app-button__add');
+
     thisElem.remove();
   }
   function delDivWithContent(searchRoot, textcontent){
@@ -355,16 +375,51 @@ function startNewReadyTask(btn,sbmt){
     } else {
       btn.disabled = true;
     }
+    delLiWithContent(document.querySelector('.app-wrapper__readylist > .app-select__list > .app-preselect__pseudo'), newInProgressTaskText);
+    delOptionWithContent(document.querySelector('.app-wrapper__in-progresslist > .app-select__list > .app-preselect__pseudo'), newInProgressTaskText);
+  
     newInProgressTask.remove();
-    delLiWithContent(document.querySelector('.app-wrapper__in-progresslist > .app-select__list > .app-preselect__pseudo'), newInProgressTask);
-    delOptionWithContent(document.querySelector('.app-wrapper__in-progresslist > .app-select__list > .app-preselect__pseudo'), newInProgressTask);
-  // delete InProgressTask
+    // delete InProgressTask
   }
   function startNewInProgressTask(btn,sbmt){
     btn.style.display='none';
     (document.querySelector('.app-wrapper__in-progresslist > .app-select__list > .select-selected')).style.display='block';
     sbmt.style.display='block';
     sbmt.focus();
+}
+
+function addNewFinishedTask(sbmt,btn,finishedList,myTasks){
+  sbmt.style.display='none';
+  btn.style.display='block';
+  let newTaskAsListElement = document.createElement('li');
+  let newFinishedTask=document.querySelector('.app-wrapper__finishedlist > .app-select__list > .select-items > .same-as-selected');
+  if (!newFinishedTask){
+    alert('Сначала выберите пункт из списка!')
+    return;
+  }
+  let newFinishedTaskText = newFinishedTask.innerText;
+  let newFinishedTaskAsText = document.createTextNode(newFinishedTaskText);
+  newTaskAsListElement.appendChild(newFinishedTaskAsText);
+  finishedList.insertBefore(newTaskAsListElement, finishedList.children[-1]);
+  myTasks.writeFinished(newFinishedTaskText);
+  
+  if (newFinishedTask.nextSibling) {
+   (newFinishedTask.nextSibling).classList.add('same-as-selected');
+  } else if (newFinishedTask.previousSibling) {
+    (newFinishedTask.previousSibling).classList.add('same-as-selected');
+  } else {
+    btn.disabled = true;
+  }
+  delLiWithContent(document.querySelector('.app-wrapper__in-progresslist > .app-select__list > .app-preselect__pseudo'), newFinishedTaskText);
+  delOptionWithContent(document.querySelector('.app-wrapper__finishedlist > .app-select__list > .app-preselect__pseudo'), newFinishedTaskText);
+
+  newFinishedTask.remove();
+}
+function startNewFinishedTask(btn,sbmt){
+  btn.style.display='none';
+  (document.querySelector('.app-wrapper__finishedlist > .app-select__list > .select-selected')).style.display='block';
+  sbmt.style.display='block';
+  sbmt.focus();
 }
 
 function recalcThings(){
