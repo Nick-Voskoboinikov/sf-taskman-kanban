@@ -148,16 +148,18 @@ loginForm.addEventListener("submit", function (e) {
         if(userMenu.style.visibility != 'visible'){
           userMenu.style.visibility='visible';
           userMenu.style.opacity=1;
+          document.querySelector('.app-user-arrow').style.transform='rotate(180deg)';
         } else {
+          document.querySelector('.app-user-arrow').style.transform='rotate(0deg)';
           userMenu.style.visibility='hidden';
           userMenu.style.opacity=0;
         }
       });
-      (document.querySelector('.app-div__usericon>span>button')).addEventListener('click',function(){
-        myTasks.recall();
-        console.log("backlogTasks",myTasks.removeFromBacklog("123"));
-        console.log(myTasks.backlogtasks);
-      });
+      // (document.querySelector('.app-div__usericon>span>button')).addEventListener('click',function(){
+      //   myTasks.recall();
+      //   console.log("backlogTasks",myTasks.removeFromBacklog("123"));
+      //   console.log(myTasks.backlogtasks);
+      // });
       backlogAddBtn.addEventListener('click',function(){
         startNewBacklogTask(backlogAddBtn,backlogSbmt,taskInputField);
       });

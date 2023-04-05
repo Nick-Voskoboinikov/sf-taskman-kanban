@@ -316,6 +316,14 @@
 .app-select__list > .select-selected {
   display: none;
 }
+.app-menu__tooltip> h5 {
+  cursor:pointer;
+  border: 2px dotted transparent;
+}
+.app-menu__tooltip> h5:hover {
+  cursor:pointer;
+  border: 2px dotted black;
+}
 
 @media only screen and (max-width:654px){
   .bg-light {
